@@ -1,0 +1,58 @@
+-------------------------------------------------------------------------------------------------
+                                PROJECT FAIR
+---------------------------------------------------------------------------------------------------
+
+                    PROJECT FAIR FRONTEND CREATION
+
+
+        1. PROJECT CREATION: npx create-vite@latest project-fair-frontend -- --template react
+        2. cd project-fair-frontend
+        3. npm install 
+        4. code .
+        5. To open react project directly from vs code,
+            update your package.json file and add the following lines inside scripts
+
+            scripts:[
+                "dev":"vite --open"
+            ]
+
+            OR
+
+            run the following command : npm run dev -- --open
+
+        6. Clear the unwanted codes
+
+        7. Install 3rd party libraries
+            - React bootstrap/React material ui/MDB bootstrap
+                    MDB bootstrap
+                    ->npm i mdb-react-ui-kit
+                    import into main.jsx file
+                    import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+            - Font awesome /React icon github io
+                React icons github
+                    https://react-icons.github.io/react-icons/
+
+                    -> npm install react-icons --save
+
+                    eg: Searcch for laptop
+                            import { GiLaptop } from "react-icons/gi";
+                            <GiLaptop />
+            - Google fonts
+            - Bootswatch 
+        8 Components Creation
+                -Pages (folder)
+                    ->Home.jsx
+                    ->Projects.jsx
+                    ->Dashboard.jsx
+                    ->Auth.jsx
+			->PageNotFound.jsx
+                -Components 
+                    -Header.jsx
+                    -footer.jsx
+		    -AddProject.jsx
+	            -EditProject.jsx
+		    -ViewProject.jsx
+		    -ProjectCard.jsx
+		    -UserProject.jsx
+
+------------------------------------------------------------------------------------------------

@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Lilita+One&family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&family=Faculty+Glyphic&family=Lilita+One&family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ga+Maamli&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Ga+Maamli&family=Pacifico&display=swap');
+span{
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+h3,h4,h5,h6{
+  font-family: "Faculty Glyphic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+h1,h2{
+  font-family: "Anton SC", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+#project{
+  font-family: "Fredericka the Great", serif;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: underline;
+}
