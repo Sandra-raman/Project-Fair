@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import { loginAPI, registerAPI } from "../../Services/allAPI";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 function Auth({ register }) {
+  const navigate=useNavigate()
   const [userDetails, setuserDetails] = useState({
     username: "",
     email: "",
@@ -38,6 +40,9 @@ function Auth({ register }) {
             progress: undefined,
             theme: "light",
           });
+          setTimeout(()=>{
+            navigate('/login')},6000)
+          
         } else {
           alert(response.response.data.message);
         }
@@ -84,6 +89,9 @@ function Auth({ register }) {
             progress: undefined,
             theme: "light",
           });
+          setTimeout(()=>{
+            navigate('/dashboard')},6000)
+            sessionStorage.setItem("username",response.data.currentUser.username)
         } else {
           toast.error(response.response.data, {
             position: "top-center",
