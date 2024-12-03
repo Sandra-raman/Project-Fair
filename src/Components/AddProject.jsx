@@ -1,15 +1,56 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { IoMdCloudUpload } from "react-icons/io";
+import { AddProjectAPI } from '../../Services/allAPI';
 
 function AddProject() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const[ProjectDetails,setProjectDetails]=useState({
+    title:"",
+    language:"",
+    github:"",
+    website:"",
+    overview:"",
+    ProjectImg:""
+  })
+  const [Preview,setPreview]=useState("")
+
+  const handleAddProject=async()=>{
+    console.log(ProjectDetails);
+    const{title,language,github,website,overview,ProjectImg}=ProjectDetails
+    if(!title||!language||!github||!website||!overview||!ProjectImg){
+      alert("Please fill the form")
+    }
+    else{
+      const reqBody=new FormData()
+      reqBody.append("title",title)
+      reqBody.append("language",language)
+      reqBody.append("github",github)
+      reqBody.append("website",website)
+      reqBody.append("overview",overview)
+      reqBody.append("ProjectImg",ProjectImg)
+
+      try {
+        const response=await AddProjectAPI()
+      } catch (error) {
+        
+      }
+    }
+    
+  }
+  useEffect(()=>{
+    if(ProjectDetails.ProjectImg){
+      setPreview(URL.createObjectURL(ProjectDetails.ProjectImg))
+    }
+  },[ProjectDetails.ProjectImg])
+
   return (
     <div>
        <Button variant="primary" onClick={handleShow}>
@@ -28,10 +69,10 @@ function AddProject() {
         </Modal.Header>
         <Modal.Body>
          <div className="row">
-          <div className="col-6">
+          <div className="col-6 p-4">
             <label>
-              <input type='file' style={{display:'none'}}/>
-              <img src="https://png.pngtree.com/png-clipart/20231016/original/pngtree-professional-web-developer-3d-illustration-png-image_13322705.png" alt="" height={'400px'} width={'400px'} />
+              <input onChange={e=>setProjectDetails({...ProjectDetails,ProjectImg:e.target.files[0]})} type='file' style={{display:'none'}}/>
+              <img src={Preview?Preview:"https://png.pngtree.com/png-clipart/20231016/original/pngtree-professional-web-developer-3d-illustration-png-image_13322705.png"} alt="" height={'400px'} width={'400px'} />
             </label>
             <p className='text-danger'>*Only allows following file types .jpg, .png, .jpeg</p>
           </div>
@@ -40,32 +81,32 @@ function AddProject() {
         controlId="floatingInput"
         label="Title"
         className="mb-3">
-        <Form.Control type="Text" placeholder="Title" />
+        <Form.Control onChange={e=>setProjectDetails({...ProjectDetails,title:e.target.value})} type="Text" placeholder="Title" />
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingInput"
         label="Language"
         className="mb-3">
-        <Form.Control type="text" placeholder="Language" />
+        <Form.Control  onChange={e=>setProjectDetails({...ProjectDetails,language:e.target.value})} type="text" placeholder="Language" />
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingInput"
         label="GitHub"
         className="mb-3">
-        <Form.Control type="text" placeholder="name@example.com" />
+        <Form.Control  onChange={e=>setProjectDetails({...ProjectDetails,github:e.target.value})} type="text" placeholder="name@example.com" />
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingInput"
         label="Website"
         className="mb-3">
-        <Form.Control type="text" placeholder="name@example.com" />
+        <Form.Control  onChange={e=>setProjectDetails({...ProjectDetails,website:e.target.value})} type="text" placeholder="name@example.com" />
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingTextarea"
-        label="Comments"
+        label="Overview"
         className="mb-3"
       >
-        <Form.Control as="textarea" placeholder="Leave a comment here" />
+        <Form.Control as="textarea" onChange={e=>setProjectDetails({...ProjectDetails,overview:e.target.value})} placeholder="Leave a comment here" />
       </FloatingLabel>
           </div>
          </div>
@@ -74,7 +115,7 @@ function AddProject() {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary">Upload</Button>
+          <Button onClick={handleAddProject} variant="primary">Upload</Button>
         </Modal.Footer>
       </Modal>
     </div>

@@ -7,3 +7,6 @@ export const registerAPI = async (reqBody) => {
 export const loginAPI=async(reqBody)=>{
     return await CommonAPI('post', `${ServerUrl}/api/login`, reqBody, "");
 }
+export const AddProjectAPI=async(reqBody,reqHeader)=>{
+    return await CommonAPI('post', `${ServerUrl}/api/AddProject`, reqBody, reqHeader);
+}
