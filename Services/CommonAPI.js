@@ -9,6 +9,7 @@ export const CommonAPI=async(httpMethod,url,reqbody,reqHeader)=>{
         }
     }
     return await axios(reqConfig)
+    
     .then((response)=>{return response})
     .catch((error)=>{return error})
 }

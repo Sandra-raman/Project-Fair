@@ -38,8 +38,9 @@ function AddProject() {
       reqBody.append("ProjectImg",ProjectImg)
 
       try {
-        const response=await AddProjectAPI()
+        const response=await AddProjectAPI(reqBody)
       } catch (error) {
+        console.log(error);
         
       }
     }
