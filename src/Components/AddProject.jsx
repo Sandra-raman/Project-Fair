@@ -51,8 +51,20 @@ function AddProject() {
           console.log(response);
           if(response.status==200){
             alert("Project added successfully...")
+            handleClose()
+            setProjectDetails({
+              title:"",
+              language:"",
+              github:"",
+              website:"",
+              overview:"",
+              ProjectImg:""
+            })
+            //set preview
           }
-          
+          else{
+            alert(response.response.data)
+          }
         } catch (error) {
           console.log(error);
           
