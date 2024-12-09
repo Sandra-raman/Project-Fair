@@ -29,6 +29,7 @@ function AddProject() {
       alert("Please fill the form")
     }
     else{
+      //Api call
       const reqBody=new FormData()
       reqBody.append("title",title)
       reqBody.append("language",language)
@@ -37,11 +38,25 @@ function AddProject() {
       reqBody.append("overview",overview)
       reqBody.append("ProjectImg",ProjectImg)
 
-      try {
-        const response=await AddProjectAPI(reqBody)
-      } catch (error) {
-        console.log(error);
-        
+      const token=sessionStorage.getItem("token")
+      console.log(token);
+      if(token){
+        const reqHeader={
+          "Content-Type":"multipart/form-json",
+          "Authorization":`Bearer ${token}`
+        }
+
+        try {
+          const response=await AddProjectAPI(reqBody,reqHeader)
+          console.log(response);
+          if(response.status==200){
+            alert("Project added successfully...")
+          }
+          
+        } catch (error) {
+          console.log(error);
+          
+        }
       }
     }
     

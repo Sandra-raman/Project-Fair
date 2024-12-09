@@ -92,6 +92,7 @@ function Auth({ register }) {
           setTimeout(()=>{
             navigate('/dashboard')},6000)
             sessionStorage.setItem("username",response.data.currentUser.username)
+            sessionStorage.setItem("token",response.data.token)
         } else {
           toast.error(response.response.data, {
             position: "top-center",
