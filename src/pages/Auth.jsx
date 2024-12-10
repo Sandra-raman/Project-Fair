@@ -90,7 +90,7 @@ function Auth({ register }) {
             theme: "light",
           });
           setTimeout(()=>{
-            navigate('/dashboard')},6000)
+            navigate('/')},6000)
             sessionStorage.setItem("username",response.data.currentUser.username)
             sessionStorage.setItem("token",response.data.token)
         } else {

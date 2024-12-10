@@ -19,7 +19,7 @@ import {
 import { FaGithub } from "react-icons/fa";
 import { FaLink } from "react-icons/fa6";
 
-function ProjectCard() {
+function ProjectCard({project}) {
   const [centredModal, setCentredModal] = useState(false);
 
   const toggleOpen = () => setCentredModal(!centredModal);
@@ -34,7 +34,7 @@ function ProjectCard() {
         </a>
       </MDBRipple>
       <MDBCardBody>
-        <MDBCardTitle className='text-center'>Project title</MDBCardTitle>
+        <MDBCardTitle className='text-center'>{project.title}</MDBCardTitle>
       </MDBCardBody>
     </MDBCard>
     <MDBModal tabIndex='-1' open={centredModal} onClose={() => setCentredModal(false)}>
