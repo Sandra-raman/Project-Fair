@@ -3,19 +3,23 @@ import { FaSearch } from "react-icons/fa";
 import { MDBContainer, MDBBtn, MDBInputGroup } from "mdb-react-ui-kit";
 import ProjectCard from "../Components/ProjectCard";
 import { getAllUserProjectAPI } from "../../Services/allAPI";
+
 function Projects() {
   const [token, setToken] = useState("");
   const [allUserProject, setallUserProject] = useState([]);
+  const [searchKey,setSearchKey]=useState("")
+  console.log(searchKey);
+  
   const getAllUserProject = async () => {
     if (token) {
       const reqHeader = {
         "Content-Type": "multipart/form-json",
-        Authorization: `Bearer ${token}`,
+       " Authorization": `Bearer ${token}`,
       };
 
       console.log(reqHeader);
       //api call
-      const response = await getAllUserProjectAPI(reqHeader);
+      const response = await getAllUserProjectAPI(searchKey,reqHeader);
       console.log(response);
       setallUserProject(response.data);
     }
@@ -25,7 +29,7 @@ function Projects() {
   useEffect(() => {
     setToken(sessionStorage.getItem("token"));
     getAllUserProject();
-  }, [token]);
+  }, [token,searchKey]);
 
   return (
     <div>
@@ -41,6 +45,8 @@ function Projects() {
                 placeholder="Search by Technology"
                 aria-label="Search"
                 type="Search"
+                onChange={e=>setSearchKey(e.target.value)}
+
               />
               <MDBBtn outline>
                 <FaSearch />
@@ -51,12 +57,13 @@ function Projects() {
         <div className="row m-4">
           {allUserProject.length > 0
             ? allUserProject.map((project) => (
-                <div className="col-4">
+                <div className="col-4 mb-4">
                   <ProjectCard project={project} />
                 </div>
               ))
             : "No projects found"}
         </div>
+
       </div>
     </div>
   );

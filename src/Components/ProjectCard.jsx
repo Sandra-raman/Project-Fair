@@ -14,7 +14,6 @@ import {
   MDBModalHeader,
   MDBModalTitle,
   MDBModalBody,
-  MDBModalFooter,
 } from "mdb-react-ui-kit";
 import { FaGithub } from "react-icons/fa";
 import { FaLink } from "react-icons/fa6";
@@ -75,7 +74,7 @@ function ProjectCard({ project }) {
                   <MDBCardImage
                     src={
                       project
-                        ? `${ServerUrl}/Uploads/${project.ProjectImg}`
+                        ? `${ServerUrl}/Uploads/${project.projectImg}`
                         : "https://content.techgig.com/thumb/msid-78949110,width-860,resizemode-4/9-Best-programming-project-ideas-for-beginners-to-level-up-their-coding-skills.jpg?119058"
                     }
                     height={"325px"}

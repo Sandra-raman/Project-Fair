@@ -7,13 +7,16 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { BrowserRouter } from 'react-router-dom';
 import './bootstrap.min.css'
 import ContextShare from '../ContextAPI/ContextShare.jsx';
+import AuthContext from '../ContextAPI/AuthContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ContextShare>
+      <AuthContext>
     <BrowserRouter>
     <App/>
     </BrowserRouter>
+    </AuthContext>
     </ContextShare>
   </StrictMode>,
 )

@@ -54,7 +54,7 @@ function AddProject() {
       console.log(token);
       if (token) {
         const reqHeader = {
-          "Content-Type": "multipart/form-json",
+          "Content-Type":"application/json",
           "Authorization": `Bearer ${token}`
         };
 

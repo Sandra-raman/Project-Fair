@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ProjectCard from '../Components/ProjectCard'
 import { getHomeProjectAPI } from '../../Services/allAPI'
+import { AuthContextResponse } from '../../ContextAPI/AuthContext'
 
 function Home() {
   const[token,setToken]=useState('')
   const [homeproject,sethomeproject]=useState([])
+  const {isAuthorized,setIsAuthorized}=useContext(AuthContextResponse)
 
 const getHomeProject =async()=>{
   const response=await getHomeProjectAPI()
@@ -16,13 +18,18 @@ const getHomeProject =async()=>{
 console.log(homeproject);
 
 
-  useEffect(()=>{
-    setToken(sessionStorage.getItem("token"))
-  },[token])
+
 
   useEffect(()=>{
-    getHomeProject()
-  },[])
+    if(sessionStorage.getItem("token")){
+      setIsAuthorized(true)
+  }
+  else{
+      setIsAuthorized(false)
+  }
+  getHomeProject()
+  },[isAuthorized])
+console.log(token);
 
   return (
     <div>
@@ -32,7 +39,7 @@ console.log(homeproject);
                 <h4 className='text-info mt-3'>A destination for all Software Development Projects</h4>
                 <p className='mt-3'>This free online Project Management Theory and Practices course will give you a brief overview of the project management knowledge and the skills needed to become a successful project manager. Project management is the application of knowledge, skills, tools, and techniques relating to getting projects completed to making sure that complex projects are completed on time, and in budget to client specifications.</p>
                 {
-                  token?
+                  isAuthorized?
                   <Link to={'/dashboard'}>
                 <button className='btn btn-primary mt-4'>View Dashboard</button>
                 </Link>
@@ -61,9 +68,14 @@ console.log(homeproject);
           </div>
         </div>
         <div className="row text-center">
-          <Link to={'/Projects'}>
-          <button className='btn'>View Projects</button>
-          </Link>
+          {
+            isAuthorized?
+            <Link to={'/Projects'}>
+            <button className='btn'>View Projects</button>
+            </Link>
+            :""
+          }
+         
         </div>
     </div>
   )

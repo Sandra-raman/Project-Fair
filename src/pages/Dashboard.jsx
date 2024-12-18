@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ViewProject from '../Components/ViewProject'
 import AddProject from '../Components/AddProject'
 import UserProfile from '../Components/UserProfile'
+import { AuthContextResponse } from '../../ContextAPI/AuthContext'
 
 function Dashboard() {
   const [username,setusername]=useState("")
+  const {isAuthorized,setIsAuthorized}=useContext(AuthContextResponse)
+  
   useEffect(()=>{
+    if(sessionStorage.getItem("token")){
+      setIsAuthorized(true)
+  }
+  else{
+      setIsAuthorized(false)
+  }
     setusername(sessionStorage.getItem("username"))
-  },[])
+  },[isAuthorized])
   return (
     <div>
       <div className="row p-5">

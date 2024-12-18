@@ -6,8 +6,14 @@ import Home from './pages/Home'
 import Auth from './pages/Auth'
 import Dashboard from './pages/Dashboard'
 import Projects from './pages/Projects'
+import { AuthContextResponse } from '../ContextAPI/AuthContext'
+import { useContext } from 'react'
+
+
 
 function App() {
+    const {isAuthorized,setIsAuthorized}=useContext(AuthContextResponse)
+  
   return (
     <>
       <Header/>
@@ -15,8 +21,13 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Auth/>}/>
         <Route path='/register' element={<Auth register/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/projects' element={<Projects/>}/>
+    {
+      isAuthorized &&
+      <>
+         <Route path='/dashboard' element={<Dashboard/>}/>
+         <Route path='/projects' element={<Projects/>}/>
+         </>
+    }
         <Route path='*' element={<Navigate to={'/'}/>}/>
 
       </Routes>
